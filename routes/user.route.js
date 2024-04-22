@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { start, end } = require("../db/connection");
-const userControllerSignUp = require("../middlewares/signup");
-const userControllerLogin = require("../middlewares/login");
+const userControllerSignUp = require("../controllers/signup.controller");
+const userControllerLogin = require("../controllers/login.controller");
+const userControllerDelete = require("../controllers/userDelete.controller")
 const authenticateToken = require("../middlewares/authenticator")
 
 router.use(express.json());
@@ -68,6 +69,14 @@ router.post("/signup/test", userControllerSignUp, async (req, res) => {
   }
 });
 
+
+// Delete User
+router.delete("/delete", userControllerDelete)
+
+router.delete("/delete/test", userControllerDelete, (req,res)=>{
+  
+});
+
 // @access  Public
 
 // Protected Route
@@ -75,5 +84,7 @@ router.post("/signup/test", userControllerSignUp, async (req, res) => {
 router.get("/protected", authenticateToken, (req, res) => {
   res.json({ message: "This is a protected route", user: req.user });
 });
+
+
 
 module.exports = router;

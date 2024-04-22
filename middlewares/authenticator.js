@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+
+
 // Middleware to authenticate the user
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];

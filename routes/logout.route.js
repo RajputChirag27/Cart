@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { start, end } = require("../db/connection");
 const authenticateToken = require("../middlewares/authenticator");
-const {checkTokenRevocation, revokedTokens} = require("../middlewares/logout");
+const {checkTokenRevocation, revokedTokens} = require("../controllers/logout.controller");
 
 
 

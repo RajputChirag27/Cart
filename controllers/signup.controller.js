@@ -1,5 +1,5 @@
 const { start } = require('../db/connection');
-const User = require('../models/user');
+const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 
 // Function to encrypt password
