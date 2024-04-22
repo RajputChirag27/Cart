@@ -1,5 +1,5 @@
-const { start } = require("../db/connection");
-const User = require("../models/user.model");
+const { start } = require("../../db/connection");
+const User = require("../../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
@@ -14,7 +14,7 @@ const decrypt = async (plainPassword, hashedPassword) => {
 
 const userControllerLogin = async (req, res, next) => {
   try {
-    await start();
+    // await start();
     const email = req.body.email;
     const password = req.body.password;
 

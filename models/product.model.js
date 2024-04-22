@@ -4,6 +4,12 @@ const productSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true,
+        trim:true,
+        unique: true
+    },
+    description:{
+        type:String,
+        required:true,
         trim:true
     },
     price:{
@@ -12,7 +18,7 @@ const productSchema = new mongoose.Schema({
         trim:true
     },
     productType : {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.String,
         ref: 'ProductType',
         required: true
     },

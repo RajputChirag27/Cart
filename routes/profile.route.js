@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { start, end } = require("../db/connection");
-const authenticateToken = require("../middlewares/authenticator");
+const authenticateToken = require("../middlewares/authenticator.middleware");
 const createProfile = require("../controllers/Profile/createProfile.controller")
+const {getProfile, getProfileByName} = require("../controllers/Profile/getProfile.controller")
 
 
 // Create Profile 
@@ -28,9 +29,12 @@ router.get('/getProfile', (req, res) => {
 
 // Get Profile Test 
 
-router.get('/getProfile/test', (req, res) => {
+router.get('/getProfile/test',getProfile, (req, res) => {
     res.send('Hey there')
 })
+
+
+router.post('/getProfileByName', getProfileByName)
 
 
 

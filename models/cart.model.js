@@ -7,11 +7,11 @@ const cartSchema = new mongoose.Schema(
       ref: "Profile",
       required: true,
     },
-    items : {
+    items : [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Item",
         required: true,
-    }
+    }]
   },
   { timestamps: true }
 );

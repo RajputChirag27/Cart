@@ -1,5 +1,5 @@
-const { start } = require('../db/connection');
-const User = require('../models/user.model');
+const { start } = require('../../db/connection');
+const User = require('../../models/user.model');
 const bcrypt = require('bcrypt');
 
 // Function to encrypt password
@@ -11,7 +11,7 @@ const encrypt = async (password) => {
 };
 
 const userControllerSignUp = async (req, res, next) => {
-    await start();
+    // await start();
     const { username, email, role, password } = req.body;
     
     try {

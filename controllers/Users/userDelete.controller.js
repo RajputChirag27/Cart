@@ -1,11 +1,11 @@
-const User = require("../models/user.model");
-const { start } = require("../db/connection");
+const User = require("../../models/user.model");
+const { start } = require("../../db/connection");
 
 
 const userControllerDelete = async (req, res, next) => {
     console.log(req.user);
     try {
-        await start()
+        // await start()
         const users = req.user
         console.log(users)
    

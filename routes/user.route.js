@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { start, end } = require("../db/connection");
-const userControllerSignUp = require("../controllers/signup.controller");
-const userControllerLogin = require("../controllers/login.controller");
-const userControllerDelete = require("../controllers/userDelete.controller")
-const authenticateToken = require("../middlewares/authenticator")
+const userControllerSignUp = require("../controllers/Users/signup.controller");
+const userControllerLogin = require("../controllers/Users/login.controller");
+const userControllerDelete = require("../controllers/Users/userDelete.controller")
+const authenticateToken = require("../middlewares/authenticator.middleware")
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -74,7 +74,7 @@ router.post("/signup/test", userControllerSignUp, async (req, res) => {
 router.delete("/delete", userControllerDelete)
 
 router.delete("/delete/test", userControllerDelete, (req,res)=>{
-  
+
 });
 
 // @access  Public
