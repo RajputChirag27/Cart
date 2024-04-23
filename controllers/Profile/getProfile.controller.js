@@ -27,7 +27,7 @@ const getProfileByName = async (req, res, next) => {
     try {
    
         const profile = await Profile.findOne({ name: req.body.name });
-        console.log(profile)
+        // console.log(profile)
         if (!profile) {
             return res.status(404).json({
                 message: "Profile not found"

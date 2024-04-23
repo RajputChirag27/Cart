@@ -79,42 +79,8 @@ const getCart = async (req, res) => {
             throw new Error("Cart not found");
         }
         res.send(cart)
-
-
-
-        // Function to generate PDF from cart data
-        const generatePDFFromCart = (cart) => {
-            // Create a new PDF document
-            const doc = new PDFDocument();
-
-            // Pipe the PDF document to a writable stream
-            const stream = fs.createWriteStream('cart.pdf');
-            doc.pipe(stream);
-
-            // Add cart details to the PDF
-            doc.fontSize(20).text('Cart Details', { align: 'center' }).moveDown();
-            doc.fontSize(14).text(`Profile ID: ${cart.profile_id}`, { align: 'left' }).moveDown();
-
-            // Loop through cart items and add them to the PDF
-            cart.items.forEach((item, index) => {
-                doc.text(`Item ${index + 1}:`, { continued: true }).moveDown();
-                doc.text(`Product ID: ${item.product_id}`, { align: 'left' });
-                doc.text(`Quantity: ${item.quantity}`, { align: 'left' });
-                doc.text(`Price: ${item.price}`, { align: 'left' });
-                doc.text(`Total: ${item.total}`, { align: 'left' }).moveDown();
-            });
-
-            // Finalize the PDF document
-            doc.end();
-
-            console.log('PDF generated successfully.');
-        };
-
         // Example usage
         generatePDFFromCart(cart);
-
-
-
         return cart;
     } catch (error) {
         throw new Error(error.message);
@@ -124,4 +90,33 @@ const getCart = async (req, res) => {
 module.exports = {
     addToCart,
     getCart
+};
+
+
+// Function to generate PDF from cart data
+const generatePDFFromCart = (cart) => {
+    // Create a new PDF document
+    const doc = new PDFDocument();
+
+    // Pipe the PDF document to a writable stream
+    const stream = fs.createWriteStream('cart.pdf');
+    doc.pipe(stream);
+
+    // Add cart details to the PDF
+    doc.fontSize(20).text('Cart Details', { align: 'center' }).moveDown();
+    doc.fontSize(14).text(`Profile ID: ${cart.profile_id}`, { align: 'left' }).moveDown();
+
+    // Loop through cart items and add them to the PDF
+    cart.items.forEach((item, index) => {
+        doc.text(`Item ${index + 1}:`, { continued: true }).moveDown();
+        doc.text(`Product ID: ${item.product_id}`, { align: 'left' });
+        doc.text(`Quantity: ${item.quantity}`, { align: 'left' });
+        doc.text(`Price: ${item.price}`, { align: 'left' });
+        doc.text(`Total: ${item.total}`, { align: 'left' }).moveDown();
+    });
+
+    // Finalize the PDF document
+    doc.end();
+
+    console.log('PDF generated successfully.');
 };

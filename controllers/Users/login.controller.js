@@ -15,9 +15,11 @@ const decrypt = async (plainPassword, hashedPassword) => {
 const userControllerLogin = async (req, res, next) => {
   try {
     // await start();
+    // console.log(req.body)
     const email = req.body.email;
     const password = req.body.password;
-
+    // console.log(email)
+    // console.log(password)
     // Check if the user exists
     const user = await User.findOne({ email });
     if (!user) {
@@ -42,7 +44,9 @@ const userControllerLogin = async (req, res, next) => {
     });
 
     // Send the token and success message
-    res.send({ token, message: "User logged in successfully." });
+    res.cookie('token', token, {maxAge: 9000000, httpOnly: true});
+    // res.send({ token, message: "User logged in successfully." });
+    res.render('Profile/profile');
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).send("Internal server error.");

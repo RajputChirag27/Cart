@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <title>Signup</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/style.css">
+</head>
+<style>
+    .parsley-errors-list {
+        color: red;
+    }
+</style>
+
+<body>
+    <header>
+        <!-- place navbar here -->
+        <%- include('../Header/header'); -%>
+    </header>
+    <main>
+        <div class="form-container mt-5 container">
+            <h2 class="text-center">Signup</h2>
+            <form action="/signup" method="post" data-parsley-validate>
+                <div class="container-fluid">
+                    <div class="row d-flex flex-column justify-content-center align-items-center mt-5">
+                        <div class="col-lg-6">
+                            <div class="form-group mb-3">
+                                <label for="name" class="form-label">Username:</label>
+                                <input type="text" id="name" name="username" class="form-control"
+                                    placeholder="Enter your username" required autocomplete="off">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="email" id="email" name="email" class="form-control"
+                                    placeholder="Enter your Email" required autocomplete="off">
+
+                            </div>
+
+                            <div class="row d-flex flex-column justify-content-center align-items-center mt-3 mb-3">
+                                <div class="form-group">
+                                    <label for="password" class="form-label">Password:</label>
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        placeholder="Password" required autocomplete="off">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordCheck" class="form-label">Password:</label>
+                                    <input type="passwordCheck" id="passwordCheck" name="passwordCheck" class="form-control"
+                                        placeholder="Password" required autocomplete="off">
+
+                                </div>
+                            </div>
+                            <div class="row d-flex flex-column justify-content-center align-items-center">
+                                <div class="col-lg">
+                                    <button type="submit"
+                                        class="form-control btn btn-primary submit-btn">SignUp</button>
+                                </div>
+                                <div class="d-flex mt-3 justify-content-end">
+                                    <p>Already a user? <a href="./index">Login</a></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+            </form>
+
+        </div>
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+
+    <!-- Jquery  -->
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+    <!-- Parsley  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"
+        integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>

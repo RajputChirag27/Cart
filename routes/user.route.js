@@ -10,17 +10,13 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 // @login Route
-router.post("/login", async (req, res) => {
-  try {
-    await start();
-    console.log("Database Connected Succesfully");
-    res.status = 200;
-    res.send("Login Route");
-  } catch (err) {
-    console.log(err);
-  }
-});
+// router.post("/login",(req, res)=>{
+//   console.log(req.body);
+//   res.send(req.body);
+// });
 
+
+router.route('/login').post(userControllerLogin)
 // @Signup route
 
 router.post("/signup", userControllerSignUp, async (req, res) => {
