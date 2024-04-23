@@ -21,10 +21,20 @@ router.post('/createProfile/test', createProfile);
 
 // Get Profile
 
-router.get('/getProfile', (req, res) => {
-    const { userId } = req.body;
-    console.log(userId)
-})
+router.get('/getProfile', async (req, res) => {
+    try {
+        // Call the getProfile function passing req, res, and next
+        const result = await getProfile(req, res);
+        console.log(result);
+        
+        // Render the profile.ejs template and pass the result
+        res.render('Profile/profile', { profile: result });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 
 
 // Get Profile Test 

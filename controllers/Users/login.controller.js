@@ -3,6 +3,7 @@ const User = require("../../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const { getProfile } = require("../Profile/getProfile.controller");
 
 dotenv.config();
 
@@ -46,7 +47,8 @@ const userControllerLogin = async (req, res, next) => {
     // Send the token and success message
     res.cookie('token', token, {maxAge: 9000000, httpOnly: true});
     // res.send({ token, message: "User logged in successfully." });
-    res.render('Profile/profile');
+    res.redirect('/profile/protected/getProfile')
+    // res.render('Profile/profile', getProfile);
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).send("Internal server error.");

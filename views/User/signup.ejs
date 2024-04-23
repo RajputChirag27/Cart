@@ -26,7 +26,7 @@
     <main>
         <div class="form-container mt-5 container">
             <h2 class="text-center">Signup</h2>
-            <form action="/signup" method="post" data-parsley-validate>
+            <form action="/users/signup" method="post" data-parsley-validate>
                 <div class="container-fluid">
                     <div class="row d-flex flex-column justify-content-center align-items-center mt-5">
                         <div class="col-lg-6">
@@ -43,6 +43,20 @@
 
                             </div>
 
+                            <div class="my-3">
+                                <label for="role" class="form-label">Role</label>
+                                <select
+                                    class="form-select form-select-md"
+                                    name="role"
+                                    id="role"
+                                >
+                                    <option selected disabled>Select one</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                </select>
+                            </div>
+                            
+
                             <div class="row d-flex flex-column justify-content-center align-items-center mt-3 mb-3">
                                 <div class="form-group">
                                     <label for="password" class="form-label">Password:</label>
@@ -50,10 +64,10 @@
                                         placeholder="Password" required autocomplete="off">
 
                                 </div>
-                                <div class="form-group">
-                                    <label for="passwordCheck" class="form-label">Password:</label>
+                                <div class="form-group mt-3">
+                                    <label for="passwordCheck" class="form-label">Check Password:</label>
                                     <input type="passwordCheck" id="passwordCheck" name="passwordCheck" class="form-control"
-                                        placeholder="Password" required autocomplete="off">
+                                        placeholder="Password" required autocomplete="off" data-parsley-equalto="#password" data-parsley-trigger="change">
 
                                 </div>
                             </div>

@@ -9,6 +9,7 @@ dotenv.config();
 function authenticateToken(req, res, next) {
   // const authHeader = req.cookies.token;
   const token = req.cookies.token;
+  res.locals.token = req.cookies.token;
   if (!token) {
     return res.status(401).send("Unauthorized: No token provided.");
   }

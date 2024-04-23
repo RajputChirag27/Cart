@@ -5,6 +5,7 @@ const userControllerSignUp = require("../controllers/Users/signup.controller");
 const userControllerLogin = require("../controllers/Users/login.controller");
 const userControllerDelete = require("../controllers/Users/userDelete.controller")
 const authenticateToken = require("../middlewares/authenticator.middleware")
+const {getProfile, getProfileByName} = require("../controllers/Profile/getProfile.controller")
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -16,8 +17,10 @@ router.use(express.urlencoded({ extended: true }));
 // });
 
 
-router.route('/login').post(userControllerLogin)
+router.route('/profile').post(userControllerLogin)
+router.route('/profile').get(getProfile)
 // @Signup route
+
 
 router.post("/signup", userControllerSignUp, async (req, res) => {
   try {
