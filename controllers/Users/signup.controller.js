@@ -34,7 +34,7 @@ const userControllerSignUp = async (req, res, next) => {
 
         // Save the user to the database
         await newUser.save();
-        res.status(201).send('User created successfully');
+        // res.status(201).send('User created successfully');
         res.redirect('/index')
     } catch (error) {
         res.status(400).send(error.message);

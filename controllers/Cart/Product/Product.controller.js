@@ -33,6 +33,7 @@ const addProduct = async (req, res) => {
                 name: req.body.name,
                 description: req.body.description,
                 price: req.body.price,
+                productImage : req.body.imageUrl,
                 productType: data._id,
             })
             await newProduct.save();
@@ -51,7 +52,7 @@ const addProduct = async (req, res) => {
 const getProducts = async (req, res) => {
     try {
         const data = await Product.find()
-        res.send(data)
+        return data;
     } catch (err) {
         console.log(err)
     }

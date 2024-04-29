@@ -1,6 +1,6 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-success">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Sasta E-commerce</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -16,8 +16,8 @@
       id="offcanvasNavbar"
       aria-labelledby="offcanvasNavbarLabel"
     >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+      <div class="offcanvas-header bg-success-subtle">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Sasta E-commerce</h5>
         <button
           type="button"
           class="btn-close text-reset"
@@ -25,13 +25,16 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body bg-success">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -41,11 +44,11 @@
               data-bs-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-              >Dropdown</a
+              >Services</a
             >
             <div class="dropdown-menu" aria-labelledby="dropdownId">
-              <a class="dropdown-item" href="#">Action 1</a>
-              <a class="dropdown-item" href="#">Action 2</a>
+              <a class="dropdown-item" href="#">Service 1</a>
+              <a class="dropdown-item" href="#">Service 2</a>
             </div>
           </li>
         </ul>
@@ -54,6 +57,7 @@
           class="btn btn-danger"
           type="button"
           id="logoutBtn"
+          onclick="logoutFunction()"
         >
           Logout
         </button>

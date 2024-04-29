@@ -8,8 +8,8 @@ dotenv.config();
 
 // Middleware to authenticate the user
  function authenticateProfileToken (req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  // const authHeader = req.headers['authorization'];
+  const token = req.cookies.token1;
   if (!token) {
     return res.status(401).send("Unauthorized: No token provided.");
   }

@@ -17,6 +17,9 @@ const productSchema = new mongoose.Schema({
         required:true,
         trim:true
     },
+    productImage:{
+        type:String,
+    },
     productType : {
         type: mongoose.Schema.Types.String,
         ref: 'ProductType',

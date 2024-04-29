@@ -24,13 +24,16 @@ const userControllerLogin = async (req, res, next) => {
     // Check if the user exists
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).send("User does not exist. Please sign up.");
-    }
+      const message  = "User does not exist. Please sign up.";
+      return res.render('User/login', { message: message });
+    } 
 
     // Verify password
     const isPasswordValid = await decrypt(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).send("Invalid password.");
+      // return res.status(401).send("Invalid password.");
+      const message = "Invalid Password"
+      return res.render('User/login', { message: message });
     }
 
     // Construct JWT payload
@@ -47,6 +50,12 @@ const userControllerLogin = async (req, res, next) => {
     // Send the token and success message
     res.cookie('token', token, {maxAge: 9000000, httpOnly: true});
     // res.send({ token, message: "User logged in successfully." });
+    // if(user.role == 'user'){
+    //   res.redirect('/profile/protected/getProfile')
+    // } else if(user.role == 'admin'){
+    //   res.redirect('/products/getProduct')
+    // }
+
     res.redirect('/profile/protected/getProfile')
     // res.render('Profile/profile', getProfile);
   } catch (error) {

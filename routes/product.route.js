@@ -12,7 +12,12 @@ router.post('/addProductType', addProductType);
 
 router.post('/addProduct', addProduct);
 
-router.get('/getProducts', getProducts)
+router.get('/getProducts', async (req,res)=>{
+    const data = await getProducts();
+    res.render('Product/getProduct', {product : data})
+})
+
+router.get('/getProductsAll', getProducts);
 
 
 module.exports = router;

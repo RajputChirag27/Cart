@@ -28,7 +28,7 @@ app.use("/users", userRoute);
 // app.use("/users", logoutRoute);
 
 app.get("/index", (req,res)=>{
-  res.render('User/login');
+  res.render('User/login', {message: null});
 })
 
 app.get("/signup", (req,res)=>{

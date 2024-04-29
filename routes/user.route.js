@@ -17,8 +17,9 @@ router.use(express.urlencoded({ extended: true }));
 // });
 
 
-router.route('/profile').post(userControllerLogin)
-router.route('/profile').get(getProfile)
+// router.route('/profile').post(userControllerLogin)
+// router.route('/profile').get(getProfile)
+router.post("/profile", userControllerLogin)
 // @Signup route
 
 

@@ -16,10 +16,10 @@ const createProfile = async (req, res, next) => {
         const user = await User.findById(req.user.userId);
         user.profiles.push(result._id.toString());
         await user.save();
-        res.send({newProfile, token});
+        res.redirect('/profile/protected/getProfile')
     } catch (err) {
         console.log(err)
-        res.send(err)
+        res.send('User Exists')
     }
 
 }

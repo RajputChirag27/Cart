@@ -52,7 +52,7 @@ const addToCart = async (req, res) => {
 
         // Update the cart in the database
         await cart.save();
-        res.send(cart);
+        res.redirect('getCart');
         return cart;
     } catch (error) {
         res.send(error.message)
@@ -73,14 +73,14 @@ const getCart = async (req, res) => {
                     model: 'Product'
                 }
             });
-
+            const total = cart.items.reduce((acc, item) => acc + item.total, 0);
 
         if (!cart) {
             throw new Error("Cart not found");
         }
-        res.send(cart)
+        res.render('Cart/getCart', {cart, total})
         // Example usage
-        generatePDFFromCart(cart);
+        // generatePDFFromCart(cart);
         return cart;
     } catch (error) {
         throw new Error(error.message);
