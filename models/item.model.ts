@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
+import { Schema } from "mongoose";
+import mongoose from "mongoose";
 
-const itemSchema = new mongoose.Schema(
+const itemSchema: Schema = new mongoose.Schema(
   {
     product_id: {
       type: mongoose.Schema.ObjectId,
@@ -9,7 +10,7 @@ const itemSchema = new mongoose.Schema(
     },
     quantity: {
       type: Number,
-      required: true,   
+      required: true,
     },
     price: {
       type: Number,
@@ -26,4 +27,4 @@ const itemSchema = new mongoose.Schema(
 
 const Item = mongoose.model('Item', itemSchema)
 
-module.exports = Item
+export default Item;

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose"
 
-const url = 'mongodb://localhost:27017/cart'
+const url : string = 'mongodb://localhost:27017/cart'
 
 const start = async()=>{
     await mongoose.connect(url)
@@ -11,4 +11,4 @@ const end = async()=>{
 }
 
 
-module.exports = {start, end};
+export default {start, end};
