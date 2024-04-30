@@ -1,24 +1,27 @@
-const { start } = require('../../db/connection');
-const User = require('../../models/user.model');
-const bcrypt = require('bcrypt');
+import { UserInterface } from '../../interfaces/user.interface';
+import { Request, Response } from 'express';
+import User from '../../models/user.model';
+import bcrypt from 'bcrypt'
+
 
 // Function to encrypt password
-const encrypt = async (password) => {
+const encrypt = async (password: string) => {
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
     return hashedPassword;
 };
 
-const userControllerSignUp = async (req, res, next) => {
+const userControllerSignUp = async (req: Request, res: Response, next: any): Promise<void> => {
     // await start();
-    const { username, email, role, password } = req.body;
-    
+    const { username, email, role, password } : UserInterface = req.body;
+
     try {
         // Check if the user already exists
         const existingUser = await User.findOne({ $or: [{ username }, { email }] });
         if (existingUser) {
-            return res.status(400).send('User already exists');
+            res.status(400).send('User already exists');
+            return;
         }
 
         // Hash the password
@@ -36,9 +39,9 @@ const userControllerSignUp = async (req, res, next) => {
         await newUser.save();
         // res.status(201).send('User created successfully');
         res.redirect('/index')
-    } catch (error) {
+    } catch (error : any) {
         res.status(400).send(error.message);
     }
 };
 
-module.exports = userControllerSignUp;
+export default userControllerSignUp

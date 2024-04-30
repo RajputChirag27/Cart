@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/express": "^4.17.21",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
@@ -19,5 +20,11 @@
     "jwt-redis": "^7.0.3",
     "mongoose": "^8.3.2",
     "pdfkit": "^0.15.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/ejs": "^3.1.5",
+    "@types/jsonwebtoken": "^9.0.6"
   }
 }

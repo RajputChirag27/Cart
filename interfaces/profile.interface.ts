@@ -1,6 +1,7 @@
-export interface ProfileInterface {
-    user_id : string;
-    name : string;
-    carts : string;
+import { Types , Document } from "mongoose";
 
+export interface ProfileInterface extends Document {
+    user_id : Types.ObjectId;
+    name : string;
+    carts ?: Types.ObjectId;
 }
