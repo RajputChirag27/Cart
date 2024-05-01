@@ -1,44 +1,50 @@
-// Assuming you have already defined Profile, Product, ProductType, Item, and Cart models
-const Profile = require('../../../models/profile.model')
-const Product = require('../../../models/product.model')
-const ProductType = require('../../../models/productType.model')
-const Item = require('../../../models/item.model')
-const Cart = require('../../../models/cart.model')
-const PDFDocument = require('pdfkit');
-const fs = require('fs');
+import { AuthenticatedRequest } from "../../../interfaces/authentication.interface";
+import { AuthenticatedResponse } from "../../../interfaces/authenticationResponse.interface";
+import { ICart } from "../../../interfaces/cart.interface";
+import { ItemInterface } from "../../../interfaces/item.interface";
+import Profile from '../../../models/profile.model';
+import Product from '../../../models/product.model';
+import ProductType from '../../../models/productType.model';
+import Item from '../../../models/item.model';
+import Cart from '../../../models/cart.model';
+import PDFDocument from 'pdfkit';
+import fs from 'fs';
+import { ProductInterface } from "../../../interfaces/product.interface";
+import { Types } from "mongoose";
 
 // Logic for adding items to the cart
-const addToCart = async (req, res) => {
+const addToCart = async (req: AuthenticatedRequest, res: AuthenticatedResponse): Promise<ICart | void> => {
     try {
         // Fetch the product details
-        const productName = req.body.name;
-        const quantity = req.body.quantity;
+        const productName: string = req.body.name;
+        const quantity: number = req.body.quantity;
 
         // Find the product in the database
-        const product = await Product.findOne({ name: productName });
+        const product   = await Product.findOne({ name: productName });
         if (!product) {
             throw new Error("Product not found");
         }
 
         // Calculate total price for the item
-        const totalPrice = product.price * quantity;
+        const totalPrice: number = (product.price as number) * quantity;
 
         // Create a new item for the cart
-        const newItem = new Item({
+        const newItem : any = new Item({
             product_id: product._id,
             quantity: quantity,
             price: product.price,
             total: totalPrice
         });
 
-        console.log(newItem._id)
+        // console.log(newItem._id);
 
         // Save the new item to the database
         await newItem.save();
 
         // Find the user's cart
-        let cart = await Cart.findOne({ profile_id: req.profile.profileId });
-        console.log(cart)
+        let cart : any = await Cart.findOne({ profile_id: req.profile.profileId });
+        console.log(cart);
+
         // If the cart doesn't exist, create a new one
         if (!cart) {
             cart = new Cart({
@@ -54,14 +60,14 @@ const addToCart = async (req, res) => {
         await cart.save();
         res.redirect('getCart');
         return cart;
-    } catch (error) {
-        res.send(error.message)
+    } catch (error: any) {
+        res.send(error.message);
         throw new Error(error.message);
     }
 };
 
 // Logic for retrieving the cart contents
-const getCart = async (req, res) => {
+const getCart = async (req: AuthenticatedRequest, res: AuthenticatedResponse): Promise<ICart | void> => {
     try {
         // Find the user's cart
         const cart = await Cart.findOne({ profile_id: req.profile.profileId })
@@ -69,32 +75,31 @@ const getCart = async (req, res) => {
             .populate({
                 path: 'items',
                 populate: {
-                    path: 'product_id', // Assuming 'product_id' is the reference to the Product model in the Item schema
+                    path: 'product_id',
                     model: 'Product'
                 }
             });
-            const total = cart.items.reduce((acc, item) => acc + item.total, 0);
 
-        if (!cart) {
-            throw new Error("Cart not found");
+        let total: number = 0; // Initialize total to a default value
+
+        if (cart) {
+            // Calculate total only if cart exists
+            total = (cart.items as any).reduce((acc: number, item: any) => acc + item.total, 0);
         }
-        res.render('Cart/getCart', {cart, total})
-        // Example usage
-        // generatePDFFromCart(cart);
-        return cart;
-    } catch (error) {
+
+        res.render('Cart/getCart', { cart, total });
+    } catch (error: any) {
         throw new Error(error.message);
     }
 };
 
-module.exports = {
+export {
     addToCart,
     getCart
 };
 
-
 // Function to generate PDF from cart data
-const generatePDFFromCart = (cart) => {
+const generatePDFFromCart = (cart: ICart): void => {
     // Create a new PDF document
     const doc = new PDFDocument();
 
@@ -107,7 +112,7 @@ const generatePDFFromCart = (cart) => {
     doc.fontSize(14).text(`Profile ID: ${cart.profile_id}`, { align: 'left' }).moveDown();
 
     // Loop through cart items and add them to the PDF
-    cart.items.forEach((item, index) => {
+    cart.items.forEach((item: any, index: number) => {
         doc.text(`Item ${index + 1}:`, { continued: true }).moveDown();
         doc.text(`Product ID: ${item.product_id}`, { align: 'left' });
         doc.text(`Quantity: ${item.quantity}`, { align: 'left' });

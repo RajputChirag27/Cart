@@ -1,20 +1,25 @@
-const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
-const User = require('../models/user.model');
-const Profile = require('../models/profile.model')
-dotenv.config();
+import { NextFunction } from "express";
+import { AuthenticatedRequest } from "../interfaces/authentication.interface";
+import { AuthenticatedResponse } from "../interfaces/authenticationResponse.interface";
+import jwt from 'jsonwebtoken'
+import dotenv from "dotenv";
+dotenv.config()
+import User from "../models/user.model";
+import Profile from "../models/profile.model";
+
+
 
 
 
 // Middleware to authenticate the user
- function authenticateProfileToken (req, res, next) {
+ function authenticateProfileToken (req : AuthenticatedRequest, res : AuthenticatedResponse , next : NextFunction) {
   // const authHeader = req.headers['authorization'];
   const token = req.cookies.token1;
   if (!token) {
     return res.status(401).send("Unauthorized: No token provided.");
   }
 
-  jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET_KEY!, async (err : any, decoded : any) => {
     if (err) {
       console.error("JWT verification error:", err);
       return res.status(403).send("Forbidden: Invalid token.");
@@ -32,4 +37,4 @@ dotenv.config();
 
 
 
-module.exports = authenticateProfileToken;
+export default authenticateProfileToken;

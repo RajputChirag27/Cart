@@ -8,13 +8,13 @@ dotenv.config();
 
 const getProfile = async (req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const profiles: ProfileInterface | null = await Profile.findOne({ user_id: req.user.userId });
+    const profiles: ProfileInterface[] | null = await Profile.find({ user_id: req.user.userId });
     if (!profiles) {
       res.status(404).json({ message: "Profile not found" });
       return;
     }
     console.log(profiles)
-    res.render('Profile/profile',  {profile : [profiles]});
+    res.render('Profile/profile',  {profile : profiles});
   } catch (err) {
     console.error(err); 
     res.status(500).json({ message: "Internal Server Error" });

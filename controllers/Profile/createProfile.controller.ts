@@ -7,14 +7,13 @@ import { ProfileInterface } from '../../interfaces/profile.interface';
 import mongoose, { Document } from 'mongoose';
 
 const createProfile = async (req: AuthenticatedRequest, res: AuthenticatedResponse, next: NextFunction): Promise<void> => {
+    console.log(req.body)
     try {
-        console.log(req.user)
         const newProfile = new Profile({
             user_id: req.user.userId,
             name: req.body.name,
         });
         const result = await newProfile.save();
-        console.log(req.user)
         const user = await User.findById(req.user.userId);
         if (user) {
             const resultId = result._id as mongoose.Types.ObjectId; 
